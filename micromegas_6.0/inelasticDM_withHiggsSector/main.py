@@ -12,13 +12,14 @@ import time
 #data['ff'] = x_[3]
 
 def diccionario(x_):
-	data = {'MAp':3., 'mphi':1,'Mchi1':0.1,'angle':1e-5,'gX':0.1182,'epsilon':0.1,'ff':0.10}
+	data = {'MAp':3., 'mphi':1,'Mchi1':0.1,'angle':1e-3,'gX':0.1182,'epsilon':0.1,'ff':0.10}
 	data['MAp'] = 10**x_[0] #Logaritmico
 	data['mphi'] = 10**x_[1] #Logaritmico
 	data['Mchi1'] = 10**x_[2] #Logaritmico
+	#data['Mchi1'] = x_[2] #Lineal
 	data['gX'] = 10**x_[3] #Logaritmico
 	data['epsilon'] = 10**x_[4] #Logaritmico
-	data['ff'] = x_[5] #lineal
+	data['ff'] = 10**x_[5] #lineal
 	return data
 
 def de_scan(bounds,nombre_ = 'datos.csv'):
@@ -51,25 +52,25 @@ def de_scan(bounds,nombre_ = 'datos.csv'):
 
 if __name__ == '__main__': 
 	#Rango espacio de parámetros
-	gX_min = -2
+	gX_min = -4
 	gX_max = 0.4
 	epsilon_min = -6
-	epsilon_max = -3
-	Mchi1_min = -2
-	Mchi1_max = 1
-	MAp_min = -2
-	MAp_max = 0
-	Mphi_min = -2
-	Mphi_max = 0
-	ff_min = 0.001
-	ff_max = 1
+	epsilon_max = 0
+	Mchi1_min = -3
+	Mchi1_max = 2
+	MAp_min = -3
+	MAp_max = 2
+	Mphi_min = -3
+	Mphi_max = 2
+	ff_min = -4
+	ff_max = 0.4
 	seed = 16
 	bounds = [(MAp_min,MAp_max),(Mphi_min,Mphi_max),(Mchi1_min,Mchi1_max),(gX_min,gX_max),(epsilon_min,epsilon_max),(ff_min,ff_max)]
 	#bounds = [(Mchi1_min,Mchi1_max),(gX_min,gX_max),(epsilon_min,epsilon_max),(ff_min,ff_max)]
 	np.random.seed(seed)
 	print("Running de_scan") 
 	tO = time.time()
-	x,call = de_scan(bounds,nombre_='datos_con_clase_datosarticulo.csv')
+	x,call = de_scan(bounds,nombre_='datos_varios_varA-1.csv')
 	de_time = time.time() - tO 
 	de_time = de_time/60
 	print("Tiempo de ejecución: ", de_time, " minutos")
